@@ -1,0 +1,160 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 80px;
+  background-image: url("../images/paper.png");
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  color: rgb(179, 66, 66);
+  background-color: #302d2c;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.jumbotron {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  padding: 0;
+  font-family: "Cormorant SC";
+  box-shadow: 10px 5px 20px 2px rgb(146, 120, 120);
+}
+
+.jumbotron .overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: auto;
+  background: linear-gradient(rgb(221, 98, 98), rgb(54, 12, 12));
+  opacity: 0.8;
+}
+
+.jumbotron .background-image {
+  height: 100%;
+  background-image: url("../images/wallpaper.jpg");
+  background-size: cover;
+  opacity: .88;
+}
+
+.jumbotron .caption {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  text-align: center;
+}
+
+.jumbotron .caption h1,
+.jumbotron .caption p {
+  color: rgb(207, 207, 207);
+  text-shadow: 2px 2px #000;
+}
+
+.jumbotron h1 {
+  font-size: 80px;
+  font-weight: 800;
+}
+
+.jumbotron p {
+  font-size: 30px;
+}
+
+.panel {
+  border-radius: 0;
+  box-shadow: 3px 3px 20px lightslategrey;
+}
+
+.panel.panel-default .panel-heading {
+  background-color: #070505;
+  position: relative;
+}
+
+.panel.panel-default .panel-heading h3 {
+  color: rgb(148, 50, 50);
+}
+
+.panel.panel-default .panel-heading .btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.panel.panel-default .panel-heading .btn.delete {
+  right: 160px;
+}
+
+.panel.panel-default .panel-body {
+  font-size: 16px;
+}
+
+.panel.panel-default .panel-heading .article-link {
+  color: rgb(221, 68, 68);
+  display: inline-block;
+  width: 80%;
+}
+
+.footer > .container > p {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  margin: 0;
+  font-weight: 800;
+  background: #d50c0c;
+}
+
+.navbar-nav > li > a.scrape-new {
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: 800;
+  color: white;
+}
+
+.navbar-nav > li > a.scrape-new:hover {
+  background: #bd5959;
+}
+
+.navbar-nav > li > a.scrape-new:active {
+  background: #701619;
+}
+
+.scrape-new {
+  cursor: pointer;
+}
+
+.m-top-80 {
+  margin-top: 80px;
+}
+
+textarea {
+  padding: 10px;
+  resize: none;
+}
+
+.bootbox-body .btn {
+  float: right;
+  margin: 5px;
+}
+
+.note.list-group-item {
+  padding: 30px;
+}
+
+.note.list-group-item .btn {
+  position: relative;
+  bottom: 10px;
+}

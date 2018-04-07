@@ -1,1 +1,3 @@
-# DAWGTAWK
+To Run: 
+
+- node server.js
