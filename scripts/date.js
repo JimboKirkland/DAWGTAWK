@@ -1,21 +1,19 @@
-// makeDate script
+// MAKEDATE
 // ===============
 
-// This function will make a formatted date for our scraped data
+// FORMATTED DATE FOR SCRAPE DATA
 var makeDate = function() {
-  // Save the current date to d
+  //CURRENT DATE TO D
   var d = new Date();
-  // Prepare an empty string for our formatted state
   var formattedDate = "";
-  // Take that string and concatenate the current month of d
+  //CONCATENATE FORMATTED MONTH OF D
   formattedDate += (d.getMonth() + 1) + "_";
-  // Next get the number of the day in the month from d and concatenate it to the formatted date string.
+  //DAY OF MONTH IN D AND ADD TO STRING
   formattedDate += d.getDate() + "_";
-  // Finally, then get the full year, and add that to the formatted date string
+  //YEAR AND ADD TO STRING
   formattedDate += d.getFullYear();
-  // Return the formatted date
   return formattedDate;
 };
 
-// Export the makeDate function so other files in the backend can use it.
+//EXPORT MODULE
 module.exports = makeDate;

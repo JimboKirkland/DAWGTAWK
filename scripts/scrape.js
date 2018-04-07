@@ -1,52 +1,47 @@
-// scrape script
+// SCRAPE SCRIPT
 // =============
 
-// Require request and cheerio, making our scrapes possible
+//REQUEST AND CHEERIO FOR SCRAPING
 var request = require("request");
 var cheerio = require("cheerio");
 
-// This function will scrape the NYTimes website (cb is our callback)
+// SCRAPES BULLDOG NEWS FROM SATURDAYDOWNSOUTH
 var scrape = function(cb) {
-  // Use the request package to take in the body of the page's html
+  // TAKE IN BODY HTML
  request("https://www.saturdaydownsouth.com/georgia-bulldogs/", function(err, res, body) {
-    // body is the actual HTML on the page. Load this into cheerio
+    //LOAD THE BODY HTML INTO CHEERIO
 
     // Saving this to $ creates a virtual HTML page we can minipulate and
     // traverse with the same methods we'd use in jQuery
     var $ = cheerio.load(body);
 
-    // Make an empty array to save our article info
+    // EMPTY ARRAY FOR ARTICLE INFO
     var articles = [];
 
-    // Now, find and loop through each element that has the "theme-summary" class
-    // (i.e, the section holding the articles)
+    // FIND AND LOOP THROUGH EACH ELEMENT WITH "RECENT-ARTICLE-CONTENT" CLASS
    $(".recent-article-content").each(function(i, element) {
     
-      // In each .theme-summary, we grab the child with the class story-heading
-
-      // Then we grab the inner text of the this element and store it
-      // to the head variable. This is the article headline
+      //HEADLINE FROM ARTICLE
       var head = $(this).children(".recent-article-info").children("h3").children("span").children("a").text().trim();
       //var head = $(this).children(".cm-stream__item__content").children("h2").children("a").text().trim();
 
-      // Grab the URL of the article
+      // URL FROM ARTICLE
       var url = $(this).children(".recent-article-info").children("h3").children("span").children("a").attr("href");
       //var url = $(this).children(".cm-stream__item__content").children("h2").children("a").attr("href");
 
-      // Then we grab any children with the class of summary and then grab it's inner text
-      // We store this to the sum variable. This is the article summary
+      // SUMMARY INFO FROM ARTICLE
+
       //var sum = $(this).children(".summary").text().trim();
       //var sum = $(this).children(".cm-stream__item__content").children("h2").children("p").text().trim();
 
-      // So long as our headline and sum and url aren't empty or undefined, do the following
+      // IF HEADLINE AND URL ARENT EMPTY DO THE FOLLOWING
       //if (head && sum && url) {
         if (head && url) {
-        // This section uses regular expressions and the trim function to tidy our headlines and summaries
-        // We're removing extra lines, extra spacing, extra tabs, etc.. to increase to typographical cleanliness.
+        // BELOW ARE REGEX EXPRESSIONS TO REMOVE UNNECESSARY ITEMS FROM HEADLINE AND URL AND SUMMARY.
         var headNeat = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         //var sumNeat = sum.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
-        // Initialize an object we will push to the articles array
+        //INITIALIZE OBJECT TO PUSH TO ARRAY
 
         var dataToAdd = {
           headline: head, //headNeat,
@@ -57,10 +52,10 @@ var scrape = function(cb) {
         articles.push(dataToAdd);
       }
     });
-    // After our loop is complete, send back the array of articles to the callback function
+    //SEND BACK ARRAY OF ARTICLES TO CALLBACK FUNCTION
     cb(articles);
   });
 };
 
-// Export the function, so other files in our backend can use it
+// EXPORT MODULE
 module.exports = scrape;

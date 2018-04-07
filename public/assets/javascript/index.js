@@ -27,18 +27,16 @@ $(document).ready(function() {
     // HANDLES APPENDING ARTICLE DATA TO PAGE
     // PASSED JSON ARRAY OF ALL ARTICLE DATA
     var articlePanels = [];
-    // We pass each article JSON object to the createPanel function which returns a bootstrap
-    // panel with our article data inside
+    // PASS ARTICLE DATA ON TO PANEL WHICH CREATES BOOTSTRAP TEMPLATE FOR DATA
     for (var i = 0; i < articles.length; i++) {
       articlePanels.push(createPanel(articles[i]));
     }
-    // append them to the articlePanels container
+    //APPEND TO CONTAINER
     articleContainer.append(articlePanels);
   }
 
   function createPanel(article) {
-    // It constructs a jQuery element containing all of the formatted HTML for the
-    // article panel
+    // FORMATTED HTML FOR PANEL
     var panel = $(
       [
         "<div class='panel panel-default'>",
@@ -58,16 +56,13 @@ $(document).ready(function() {
         "</div>"
       ].join("")
     );
-    // We attach the article's id to the jQuery element
-    // We will use this when trying to figure out which article the user wants to save
+    
     panel.data("_id", article._id);
-    // We return the constructed panel jQuery element
     return panel;
   }
 
   function renderEmpty() {
-    // This function renders some HTML to the page explaining we don't have any articles to view
-    // Using a joined array of HTML string data because it's easier to read/change than a concatenated string
+    // IF EMPTY THIS WILL RENDER EMPTY EXPLANATION
     var emptyAlert = $(
       [
         "<div class='alert alert-warning text-center'>",
@@ -84,37 +79,32 @@ $(document).ready(function() {
         "</div>"
       ].join("")
     );
-    // Appending this data to the page
+    //APPEND DATA TO PAGE
     articleContainer.append(emptyAlert);
   }
 
   function handleArticleSave() {
-    // This function is triggered when the user wants to save an article
-    // When we rendered the article initially, we attatched a javascript object containing the headline id
-    // to the element using the .data method. Here we retrieve that.
+    // TO SAVE AN ARTICLE
     var articleToSave = $(this).parents(".panel").data();
     articleToSave.saved = true;
-    // Using a patch method to be semantic since this is an update to an existing record in our collection
+    // PATCH METHOD SINCE THIS IS EXISTING DATA
     $.ajax({
       method: "PUT",
       url: "/api/headlines",
       data: articleToSave
     }).then(function(data) {
-      // If successful, mongoose will send back an object containing a key of "ok" with the value of 1
-      // (which casts to 'true')
+      
       if (data.ok) {
-        // Run the initPage function again. This will reload the entire list of articles
+        // RELOAD ENTIRE PAGE OF ARTICLES
         initPage();
       }
     });
   }
 
   function handleArticleScrape() {
-    // This function handles the user clicking any "scrape new article" buttons
+    //SCRAPE BUTTON NEW
     $.get("/api/fetch").then(function(data) {
-      // If we are able to succesfully scrape the NYTIMES and compare the articles to those
-      // already in our collection, re render the articles on the page
-      // and let the user know how many unique articles we were able to save
+      //IF NEW ARTICLES ARE AVAILABLE IT GRABS OTHERWISE IT SAYS NO NEW
       initPage();
       bootbox.alert("<h3 class='text-center m-top-80'>" + data.message + "<h3>");
     });
